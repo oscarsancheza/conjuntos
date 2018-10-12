@@ -1,8 +1,17 @@
 package com.mcc;
 
-import java.util.HashMap;
-
 public class Par<K, E> {
 
-  private HashMap<K, E> elementos;
+  private K elementoUno;
+  private E elementoDos;
+
+  public Par(K elementoUno, E elementoDos) {
+    this.elementoUno = elementoUno;
+    this.elementoDos = elementoDos;
+  }
+
+  @Override
+  public String toString() {
+    return "(" + elementoUno + "," + elementoDos + ")";
+  }
 }

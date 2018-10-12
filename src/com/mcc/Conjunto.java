@@ -1,74 +1,32 @@
 package com.mcc;
 
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
 
-public class Conjunto<T> implements IConjunto<T> {
+public interface Conjunto<T> {
 
-  private Set<T> elementos;
+  Conjunto<T> union(Conjunto<T> conjunto);
 
-  public Conjunto() {
-    elementos = new HashSet<>();
-  }
+  Conjunto<T> interseccion(Conjunto<T> conjunto);
 
-  public Conjunto(Collection<T> elementos) {
-    if (elementos == null) {
-      throw new NullPointerException("La colección no debe ser nula");
-    }
+  Conjunto<T> diferencia(Conjunto<T> conjunto);
 
-    this.elementos = new HashSet<>();
-    for (T item : elementos) {
-      this.elementos.add(item);
-    }
-  }
+  boolean subConjunto(Conjunto<T> conjunto);
 
-  public Conjunto(T... elementos) {
-    if (elementos == null) {
-      throw new NullPointerException("La colección no debe ser nula");
-    }
+  boolean subConjuntoPropio(Conjunto<T> conjunto);
 
-    this.elementos = new HashSet<>();
-    for (T item : elementos) {
-      this.elementos.add(item);
-    }
-  }
+  Conjunto<T> complemento(Conjunto<T> conjunto);
 
-  public int size() {
-    return 0;
-  }
+  boolean contains(T elemento);
 
-  @Override
-  public boolean equals(Object obj) {
-    return super.equals(obj);
-  }
+  int size();
 
-  @Override
-  public String toString() {
-    return elementos.toString();
-  }
+  boolean isEmpty();
 
-  public Set<T> getElementos() {
-    return elementos;
-  }
+  Set<T> getElementos();
 
-  public void setElementos(Set<T> elementos) {
-    this.elementos = elementos;
-  }
+  void setElementos(Set<T> elementos);
 
-  @Override
-  public Conjunto<T> union(Conjunto<T> conjunto) {
-    Set<T> unionConjuntos = new HashSet<>();
-    if (conjunto != null) {
-      unionConjuntos.addAll(conjunto.getElementos());
-    }
-    unionConjuntos.addAll(this.elementos);
+  <E> Conjunto<Par<T,E>> productoCartesiano(Conjunto<E> conjunto);
 
-    return new Conjunto<>(unionConjuntos);
-  }
-
-  @Override
-  public Conjunto<T> interseccion(Conjunto<T> conjunto) {
-    return null;
-  }
+  Conjunto<Set<T>> potencia();
 }
