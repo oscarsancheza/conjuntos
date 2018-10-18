@@ -37,10 +37,15 @@ public class Main {
             + ": "
             + cDiffDos.subConjuntoPropio(cDiff));
 
-    Conjunto<Par<Integer, String>> algo = new ConjuntoImpl<>(1,2,3).productoCartesiano(new ConjuntoImpl<>("oscar","omar"));
-    System.out.print(algo.toString());
+    Conjunto<Par<Integer, String>> pc =
+        new ConjuntoImpl<>(1, 2, 3).productoCartesiano(new ConjuntoImpl<>("oscar", "omar"));
+    System.out.print(pc.toString());
 
     alumnos.potencia();
 
+    Conjunto<Par<Integer, String>> deepClone =
+        ((ConjuntoImpl<Par<Integer, String>>) pc).deepClone();
+
+    System.out.println(deepClone.toString());
   }
 }
