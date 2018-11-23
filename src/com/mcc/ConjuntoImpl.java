@@ -53,7 +53,27 @@ public class ConjuntoImpl<T> implements Conjunto<T>, Cloneable {
 
   @Override
   public boolean equals(Object obj) {
-    return super.equals(obj);
+    boolean equals = false;
+
+    if (obj == this) {
+      equals = true;
+    } else if (obj instanceof Conjunto) {
+      Conjunto<?> e = (Conjunto<?>) obj;
+      if (e.size() == this.size()) {
+        for (Object item : this.getElementos()) {
+          equals = false;
+          for (Object item2 : e.getElementos()) {
+            if (item.equals(item2)) {
+              equals = true;
+            }
+          }
+          if (!equals) {
+            break;
+          }
+        }
+      }
+    }
+    return equals;
   }
 
   @Override
@@ -116,9 +136,8 @@ public class ConjuntoImpl<T> implements Conjunto<T>, Cloneable {
     return cloner.deepClone(this);
   }
 
-  @SuppressWarnings("unchecked")
   @Override
-  public ConjuntoImpl<T> clone() {
+  public Object clone() {
     ConjuntoImpl<T> conjunto;
     try {
       conjunto = (ConjuntoImpl<T>) super.clone();
